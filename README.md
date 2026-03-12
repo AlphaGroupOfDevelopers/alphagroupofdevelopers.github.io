@@ -1,111 +1,101 @@
-# AlphaGroupOfDevelopers Website
+# AlphaGroupOfDevelopers - React 19 Website
 
 Welcome to the official website repository for **AlphaGroupOfDevelopers**, a talented team of software engineers and web developers from Ghana Communication Technology University (GCTU).
 
-## 📁 Project Contents
+## 🚀 Modern Tech Stack
 
-This package contains the following files:
+This is a **React 19** application built with:
 
-### Website Files
-- **index.html** - Main website homepage with all sections
-- **styles.css** - Complete styling and responsive design
-- **script.js** - JavaScript for interactivity and form handling
+- **React 19.2.1** - Latest React with new features
+- **TypeScript** - Full type safety
+- **Vite** - Modern build tool (fast development)
+- **Tailwind CSS 4.1** - Latest styling with utility-first approach
+- **Radix UI** - 53+ professional UI components
+- **Express** - Production backend server
+- **React Hook Form** - Form handling
+- **Lucide React** - Beautiful icons
 
-### Marketing Materials
-- **flyer.html** - Professional flyer (print-ready, 8.5" × 11")
-- **business-card.html** - Business card designs (print-ready, 3.5" × 2")
+## 📁 Project Structure
 
-### Documentation
-- **README.md** - This file
+```
+├── client/                    # React frontend
+│   ├── src/
+│   │   ├── components/       # Reusable UI components
+│   │   │   ├── ui/          # 53+ Radix UI components
+│   │   │   ├── ErrorBoundary.tsx
+│   │   │   ├── ManusDialog.tsx
+│   │   │   └── Map.tsx
+│   │   ├── contexts/        # React contexts
+│   │   ├── hooks/           # Custom React hooks
+│   │   ├── lib/             # Utility functions
+│   │   ├── pages/           # Page components
+│   │   └── main.tsx         # App entry point
+├── server/                   # Express backend
+├── shared/                   # Shared constants/types
+├── vite.config.ts           # Vite configuration
+└── package.json             # Dependencies
+```
 
 ## 🚀 Getting Started
 
-### Option 1: Open Directly in Browser
-Simply open `index.html` in any modern web browser to view the website.
+### Prerequisites
+- Node.js 18+ or 20+
+- pnpm (recommended) or npm/yarn
+
+### Installation
 
 ```bash
-# On Windows
-start index.html
+# Install dependencies
+pnpm install
 
-# On macOS
-open index.html
+# Start development server
+pnpm dev
 
-# On Linux
-xdg-open index.html
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
 ```
 
-### Option 2: Use a Local Server
-For better performance and to test form functionality, use a local server:
+### Development
+The development server runs at `http://localhost:3000` with hot reload.
 
-```bash
-# Using Python 3
-python -m http.server 8000
+### Production
+The production build creates optimized static files in `dist/public/` and bundles the Express server.
 
-# Using Node.js (with http-server)
-npx http-server
+## 🎨 Features
 
-# Using PHP
-php -S localhost:8000
-```
+### Modern React 19
+- Server Components ready
+- New hooks and improvements
+- Better error handling
+- Optimized rendering
 
-Then open `http://localhost:8000` in your browser.
+### Professional UI
+- 53+ pre-built Radix UI components
+- Responsive design
+- Dark/light theme support
+- Smooth animations with Framer Motion
+
+### Performance
+- Code splitting
+- Image optimization
+- Lazy loading
+- Tailwind CSS 4.1 for minimal CSS
+
+### Development Experience
+- TypeScript for type safety
+- ESLint + Prettier
+- Hot module replacement
+- Custom debug logging system
 
 ## 📧 Contact Form
 
-The contact form on the website uses the `mailto:` protocol. When users submit the form, it will:
-1. Open their default email client
-2. Pre-fill the email with the contact information
-3. Send to: **alphaGroupOfDevelopers@gmail.com**
-
-## 🖨️ Printing Materials
-
-### Flyer
-1. Open `flyer.html` in a browser
-2. Go to File → Print (or Ctrl+P / Cmd+P)
-3. Print on 8.5" × 11" paper (standard letter size)
-4. Use color printing for best results
-
-### Business Cards
-1. Open `business-card.html` in a browser
-2. Go to File → Print (or Ctrl+P / Cmd+P)
-3. Print on 3.5" × 2" cardstock
-4. Cut along the card boundaries
-5. Use color printing for best results
-
-## 🎨 Customization
-
-### Colors
-The website uses a professional color scheme:
-- **Primary Blue**: #1e40af
-- **Secondary Teal**: #0f766e
-- **Accent Gold**: #f59e0b
-- **Light Background**: #f9fafb
-
-To change colors, edit the `:root` variables in `styles.css`:
-
-```css
-:root {
-    --primary-color: #1e40af;
-    --secondary-color: #0f766e;
-    --accent-color: #f59e0b;
-    /* ... other variables ... */
-}
-```
-
-### Content
-Edit the text content directly in `index.html`. Key sections:
-- Hero section (main headline and call-to-action)
-- About section (company description)
-- Services section (service offerings)
-- Projects section (client projects)
-- Team section (team member information)
-- Contact section (contact details)
-
-### Email Address
-To change the contact email, search for `alphaGroupOfDevelopers@gmail.com` in:
-- `index.html` (contact form and footer)
-- `flyer.html` (footer section)
-- `business-card.html` (card footer)
+The contact form uses the `mailto:` protocol. When users submit the form:
+1. Opens their default email client
+2. Pre-fills email with contact information
+3. Sends to: **alphaGroupOfDevelopers@gmail.com**
 
 ## 📱 Responsive Design
 
@@ -116,52 +106,50 @@ The website is fully responsive and works on:
 
 ## 🔧 Technical Details
 
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with gradients, flexbox, and grid
-- **JavaScript** - Vanilla JS (no frameworks)
-- **No Backend Required** - Fully static website
-- **No Dependencies** - Works out of the box
-
-## 📋 Browser Support
-
-- Chrome/Chromium (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
+- **React 19** - Latest React with modern features
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool
+- **Tailwind CSS 4.1** - Utility-first CSS
+- **Radix UI** - Accessible component primitives
+- **Express** - Production backend
+- **React Router** - Client-side routing
+- **React Hook Form** - Form validation
+- **Lucide React** - Icon library
 
 ## 🌐 Deployment
 
-To deploy this website online:
+### GitHub Pages
+```bash
+# Build the project
+pnpm build
 
-1. **GitHub Pages** (Free)
-   - Push files to a GitHub repository
-   - Enable GitHub Pages in settings
-   - Your site will be live at `https://username.github.io/repository`
+# Deploy to GitHub Pages
+# Enable GitHub Pages in repository settings
+```
 
-2. **Netlify** (Free)
-   - Drag and drop the folder to Netlify
-   - Get a live URL instantly
+### Vercel/Netlify
+Connect your GitHub repository and deploy automatically.
 
-3. **Traditional Web Hosting**
-   - Upload files via FTP to your hosting provider
-   - Access via your domain name
+### Traditional Hosting
+```bash
+# Build the project
+pnpm build
 
-4. **Vercel** (Free)
-   - Connect your GitHub repository
-   - Automatic deployments on push
+# Upload dist/public/ to your web server
+# Start the Express server for API routes
+```
 
 ## 📝 Future Enhancements
 
-Potential improvements for future versions:
-- Backend integration for email handling
+Potential improvements:
+- Backend API for form submissions
 - Database for client testimonials
-- Blog section for company updates
-- Portfolio gallery with project images
-- Team member profiles with photos
-- Multilingual support (English, Twi, etc.)
-- Dark mode toggle
+- Blog section with MDX
+- Portfolio gallery
+- Team member profiles
+- Multilingual support
 - Newsletter subscription
+- Analytics dashboard
 
 ## 📞 Contact Information
 
@@ -181,7 +169,8 @@ This website is the intellectual property of AlphaGroupOfDevelopers. All rights 
 
 ---
 
-**Created**: 2024
-**Last Updated**: March 2025
+**Created**: 2024  
+**Migrated to React 19**: March 2026  
+**Last Updated**: March 2026
 
 For questions or support, please contact us at alphaGroupOfDevelopers@gmail.com
