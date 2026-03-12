@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const team = [
+const team: { name: string; role: string; image?: string; background?: string; expertise?: string; bio: string }[] = [
   {
     name: "Kingsley Okyere",
     role: "Founder & Lead Architect",
@@ -14,6 +14,7 @@ const team = [
   {
     name: "Godfred Fokuo",
     role: "Co-Founder & User Experience Lead",
+    // image will be added when available
     background: "Full Stack Developer & Behavioral Economics Enthusiast.",
     expertise: "Making Software Easy to Use and Engaging.",
     bio: "Connects human psychology with computer logic, making sure people actually want to use the systems we build. Godfred bridges the gap between technical logic and human behavior."
