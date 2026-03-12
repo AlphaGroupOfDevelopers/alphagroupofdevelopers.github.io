@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Users, Briefcase, Code2, Wrench, BarChart2, Lightbulb, Rocket, Globe, MessageSquare } from "lucide-react";
 import { useState } from "react";
+import LeadershipTeam from "@/components/LeadershipTeam";
+
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -42,6 +44,7 @@ export default function Home() {
             <ul className="hidden md:flex space-x-8">
               <li><a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors">Home</a></li>
               <li><a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors">About</a></li>
+              <li><a href="#team" className="text-gray-700 hover:text-blue-600 transition-colors">Team</a></li>
               <li><a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a></li>
               <li><a href="#projects" className="text-gray-700 hover:text-blue-600 transition-colors">Projects</a></li>
               <li><a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a></li>
@@ -143,6 +146,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <LeadershipTeam />
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50">
