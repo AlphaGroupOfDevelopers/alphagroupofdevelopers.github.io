@@ -53,20 +53,34 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Building Digital Solutions for Ghana's Future
-            </h1>
-            <p className="text-xl text-gray-600 mb-10">
-              We transform complex business challenges into elegant software solutions that drive growth and innovation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                <a href="#contact">Get Started</a>
-              </Button>
-              <Button size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                <a href="#about">Learn More</a>
-              </Button>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Text */}
+            <div className="max-w-xl">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                Building Digital Solutions for Ghana's Future
+              </h1>
+              <p className="text-xl text-gray-600 mb-10">
+                We transform complex business challenges into elegant software solutions that drive growth and innovation.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <a href="#contact">Get Started</a>
+                </Button>
+                <Button size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+                  <a href="#about">Learn More</a>
+                </Button>
+              </div>
+            </div>
+            {/* Hero Image */}
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl ring-4 ring-blue-100">
+                <img
+                  src="/team.jpeg"
+                  alt="AlphaGroupOfDevelopers team working on software solutions"
+                  className="w-full h-80 md:h-[420px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent rounded-2xl" />
+              </div>
             </div>
           </div>
         </div>
