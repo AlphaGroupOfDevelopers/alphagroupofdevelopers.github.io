@@ -36,6 +36,19 @@ export default function Contact() {
               </p>
               
               <div className="space-y-6 text-lg font-sans">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="mb-12 border border-border p-2 bg-white shadow-sm"
+                >
+                  <img 
+                    src="/alpha_business_card_updated.png" 
+                    alt="AlphaGroupOfDevelopers Business Card" 
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+
                 <div>
                   <h4 className="text-xs uppercase tracking-widest text-primary font-bold mb-2">Email</h4>
                   <a href="mailto:alphagroupofdevelopers@gmail.com" className="text-primary hover:italic transition-all">

@@ -55,7 +55,7 @@ export default function Team() {
                 <div key={i} className="group border-t border-border pt-10">
                   <div className="flex flex-col gap-6">
                     {member.image && (
-                      <div className="w-full aspect-square bg-secondary overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 mb-4">
+                      <div className="w-full aspect-square bg-secondary overflow-hidden mb-4 shadow-sm border border-border">
                         <img 
                           src={member.image} 
                           alt={member.name} 

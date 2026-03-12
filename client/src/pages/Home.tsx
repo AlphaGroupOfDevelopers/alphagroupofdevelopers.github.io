@@ -28,7 +28,7 @@ export default function Home() {
     {
       title: "Engineering with Integrity and Precision",
       desc: "Our systems are built to last, combining stable architecture with intuitive human-centric design.",
-      image: "/Founder.jpeg"
+      image: "/enhanced_team.png"
     },
     {
       title: "Your Partner in Digital Transformation",
@@ -98,7 +98,7 @@ export default function Home() {
                           <img
                             src={slide.image}
                             alt="AlphaGroupOfDevelopers workspace"
-                            className="w-full h-full object-cover grayscale opacity-80"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       </motion.div>
