@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Users, Calendar, Briefcase, Code, Database, Wrench, BarChart, MessageSquare, Rocket } from "lucide-react";
+import { Mail, MapPin, Users, Briefcase, Code2, Wrench, BarChart2, Lightbulb, Rocket, Globe, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
@@ -93,7 +93,7 @@ export default function Home() {
                   <span><strong>Innovation:</strong> We stay ahead of technology trends</span>
                 </li>
                 <li className="flex items-start">
-                  <Code className="w-5 h-5 text-blue-600 mr-3 mt-0.5" />
+                  <Code2 className="w-5 h-5 text-blue-600 mr-3 mt-0.5" />
                   <span><strong>Excellence:</strong> We deliver high-quality solutions</span>
                 </li>
                 <li className="flex items-start">
@@ -136,23 +136,28 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Our Services</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: "💻", title: "Web Development", desc: "Modern, responsive websites and web applications built with the latest technologies." },
-              { icon: "📱", title: "Software Engineering", desc: "Robust software solutions designed to solve complex business problems." },
-              { icon: "🔧", title: "System Integration", desc: "Seamless integration of business systems and applications for optimal efficiency." },
-              { icon: "📊", title: "Business Solutions", desc: "Custom applications tailored to your business needs and goals." },
-              { icon: "🎯", title: "Consulting", desc: "Expert advice on technology strategy and digital transformation." },
-              { icon: "🚀", title: "Deployment & Support", desc: "Full deployment and ongoing technical support for your solutions." }
-            ].map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="text-3xl mb-4">{service.icon}</div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">{service.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
+              { icon: Globe,    title: "Web Development",     desc: "Modern, responsive websites and web applications built with the latest technologies." },
+              { icon: Code2,    title: "Software Engineering", desc: "Robust software solutions designed to solve complex business problems." },
+              { icon: Wrench,   title: "System Integration",   desc: "Seamless integration of business systems and applications for optimal efficiency." },
+              { icon: BarChart2, title: "Business Solutions",  desc: "Custom applications tailored to your business needs and goals." },
+              { icon: Lightbulb, title: "Consulting",          desc: "Expert advice on technology strategy and digital transformation." },
+              { icon: Rocket,   title: "Deployment & Support", desc: "Full deployment and ongoing technical support for your solutions." }
+            ].map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <div className="mb-4 w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">{service.desc}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
