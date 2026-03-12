@@ -23,10 +23,7 @@ export default function Navbar() {
           <Link href="/">
             <div className="flex items-center space-x-2 cursor-pointer group">
               <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-primary">
-                AlphaGroup
-              </span>
-              <span className="text-xs uppercase tracking-widest text-muted-foreground mt-1 font-sans">
-                Engineers
+                AlphaGroupOfDevelopers
               </span>
             </div>
           </Link>
