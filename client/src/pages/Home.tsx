@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import useEmblaCarousel from "embla-carousel-react";
 import { Rocket, Code2, Users, MessageSquare } from "lucide-react";
 import { useEffect } from "react";
+import Tilt from 'react-parallax-tilt';
 
 export default function Home() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -115,6 +116,22 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Institutional Trust Section */}
+        <section className="py-12 border-b border-border bg-secondary/10">
+          <div className="container mx-auto px-6">
+            <p className="text-[10px] font-sans tracking-[0.3em] uppercase text-muted-foreground/50 mb-8 text-center">
+              Trusted by Leading Institutions
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+              {["Ghana Revenue Authority", "Atsupi's Cosmetics", "Walmas Travel", "iPhone Global"].map((partner, i) => (
+                <span key={i} className="text-xl md:text-2xl font-serif text-primary font-bold tracking-tighter cursor-default">
+                  {partner}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* About Us Section */}
         <section id="about" className="py-24 bg-secondary/30 border-y border-border">
           <div className="container mx-auto px-6">
@@ -184,24 +201,152 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Philosophy Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-serif mb-8 text-primary">Our focus is stability.</h2>
-                <p className="text-lg text-muted-foreground font-sans leading-relaxed">
-                  Technology moves fast, but your tools shouldn't break every year. 
-                  We prioritize clean code and stable architecture so you can 
-                  focus on your business, not your software.
-                </p>
-              </div>
-              <div className="bg-secondary p-12 aspect-square flex items-center justify-center">
-                <blockquote className="text-2xl font-serif italic text-primary text-center">
-                  "Good design is as little design as possible."
-                </blockquote>
-              </div>
+        {/* Technology Stack Section */}
+        <section className="relative py-32 overflow-hidden">
+          {/* Dynamic Gradient Background */}
+          <div className="absolute inset-0 bg-secondary/30" />
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.15),transparent_70%)]" />
+          
+          <div className="container relative mx-auto px-6 z-10">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-[10px] font-sans tracking-[0.4em] uppercase text-primary/60 mb-16 text-center"
+            >
+              Our Engineering Stack
+            </motion.p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-8">
+              {[
+                { name: "React", category: "Frontend" },
+                { name: "TypeScript", category: "Language" },
+                { name: "Node.js", category: "Backend" },
+                { name: "PostgreSQL", category: "Database" },
+                { name: "Framer Motion", category: "Animation" },
+                { name: "Tailwind CSS", category: "Styling" },
+                { name: "Vite", category: "Build Tool" },
+                { name: "Git", category: "Version Control" }
+              ].map((tech, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="text-center group"
+                >
+                  <Tilt 
+                    tiltMaxAngleX={15} 
+                    tiltMaxAngleY={15} 
+                    glareEnable={true} 
+                    glareMaxOpacity={0.1} 
+                    glareColor="#ffffff" 
+                    glarePosition="all"
+                    className="inline-block"
+                  >
+                    <div className="px-8 py-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-primary/5 group-hover:border-primary/20 group-hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-500">
+                      <h4 className="text-xl md:text-2xl font-serif text-primary mb-1 group-hover:italic">
+                        {tech.name}
+                      </h4>
+                      <p className="text-[9px] uppercase tracking-widest text-muted-foreground/80">
+                        {tech.category}
+                      </p>
+                    </div>
+                  </Tilt>
+                </motion.div>
+              ))}
             </div>
+          </div>
+        </section>
+
+        {/* Key Metrics Section */}
+        <section className="py-24 bg-secondary/20 border-y border-border">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+              {[
+                { value: "2024", label: "Founded", detail: "Emerging as a leader in Ghana's tech sector." },
+                { value: "5+", label: "Strategic Partners", detail: "Partnering with government and private enterprise." },
+                { value: "100%", label: "Stability Focused", detail: "Engineering legacy systems that survive and scale." }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-center md:text-left md:border-l md:border-border md:pl-8"
+                >
+                  <span className="block text-5xl md:text-6xl font-serif text-primary font-bold mb-2">
+                    {stat.value}
+                  </span>
+                  <span className="block text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">
+                    {stat.label}
+                  </span>
+                  <p className="text-sm text-muted-foreground max-w-[200px] mx-auto md:mx-0">
+                    {stat.detail}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Philosophy & Values Section Haus */}
+        <section className="py-32 bg-background border-t border-border">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mb-24">
+              <h2 className="text-4xl md:text-5xl font-serif text-primary mb-8">Engineering for the long term.</h2>
+              <p className="text-xl text-muted-foreground font-sans leading-relaxed">
+                Technology moves fast, but your tools shouldn't break every year. 
+                We prioritize clean code and stable architecture so you can 
+                focus on your business, not your software.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {[
+                {
+                  title: "Integrity",
+                  desc: "We don't cut corners. Every line of code is written with the future of your business in mind."
+                },
+                {
+                  title: "Stability",
+                  desc: "Our systems are built to handle growth and stress without failing when you need them most."
+                },
+                {
+                  title: "Precision",
+                  desc: "Mathematical accuracy and logical clarity are at the core of everything we engineer."
+                }
+              ].map((value, i) => (
+                <div key={i} className="group">
+                  <div className="w-12 h-[1px] bg-primary mb-6 group-hover:w-full transition-all duration-700"></div>
+                  <h3 className="text-2xl font-serif text-primary mb-4">{value.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {value.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="py-32 bg-primary text-background">
+          <div className="container mx-auto px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto"
+            >
+              <h2 className="text-5xl md:text-7xl font-serif mb-12">Ready to build something that lasts?</h2>
+              <Link href="/contact">
+                <Button size="lg" className="px-12 py-8 text-xl bg-background text-primary hover:bg-background/90 rounded-none h-auto">
+                  Start a conversation
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </section>
       </main>

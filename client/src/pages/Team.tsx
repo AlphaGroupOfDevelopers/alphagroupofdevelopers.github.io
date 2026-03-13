@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Tilt from 'react-parallax-tilt';
 
 const team: { name: string; role: string; image?: string; background?: string; expertise?: string; bio: string }[] = [
   {
@@ -57,13 +58,22 @@ export default function Team() {
                 <div key={i} className="group border-t border-border pt-10">
                   <div className="flex flex-col gap-6">
                     {member.image && (
-                      <div className="w-full aspect-square bg-secondary overflow-hidden mb-4 shadow-sm border border-border">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <Tilt 
+                        tiltMaxAngleX={10} 
+                        tiltMaxAngleY={10} 
+                        glareEnable={true} 
+                        glareMaxOpacity={0.15} 
+                        glareColor="#ffffff"
+                        perspective={1500}
+                      >
+                        <div className="w-full aspect-square bg-secondary overflow-hidden mb-4 shadow-lg border border-border transition-all duration-500 group-hover:shadow-2xl">
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
+                      </Tilt>
                     )}
                     <div>
                       <h3 className="text-3xl font-serif text-primary mb-2">{member.name}</h3>

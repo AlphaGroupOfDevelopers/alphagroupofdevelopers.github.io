@@ -6,15 +6,18 @@ import Footer from "@/components/layout/Footer";
 const partnerships = [
   {
     client: "Ghana Revenue Authority (GRA)",
-    desc: "Engineering systems to support fiscal management, e-VAT platforms, and national economic infrastructure."
+    desc: "Engineering systems to support fiscal management, e-VAT platforms, and national economic infrastructure.",
+    tags: ["Infrastructure", "National Systems", "Scale"]
   },
   {
     client: "Atsupi's Cosmetics and Trading",
-    desc: "Developing a premium digital storefront and automated e-commerce solutions to streamline sales."
+    desc: "Developing a premium digital storefront and automated e-commerce solutions to streamline sales.",
+    tags: ["E-commerce", "Automation", "CX"]
   },
   {
     client: "Walmas Travel Consult & iPhone Global",
-    desc: "Partnering to build secure, scalable digital foundations and agentic workflows for enterprise operations."
+    desc: "Partnering to build secure, scalable digital foundations and agentic workflows for enterprise operations.",
+    tags: ["Enterprise", "AI Workflows", "Security"]
   }
 ];
 
@@ -57,9 +60,16 @@ export default function Projects() {
                     <h3 className="text-3xl md:text-4xl font-serif text-primary group-hover:italic transition-all mb-4">
                       {item.client}
                     </h3>
-                    <p className="text-lg font-sans text-muted-foreground max-w-xl leading-relaxed">
+                    <p className="text-lg font-sans text-muted-foreground max-w-xl leading-relaxed mb-6">
                       {item.desc}
                     </p>
+                    <div className="flex flex-wrap gap-3">
+                      {item.tags.map((tag, ti) => (
+                        <span key={ti} className="text-[10px] uppercase tracking-wider px-3 py-1 bg-secondary text-primary border border-border">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <ArrowRight 
                     size={24} 

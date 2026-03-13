@@ -1,8 +1,16 @@
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function Navbar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,6 +19,7 @@ export default function Navbar() {
     { name: "The Team", path: "/team" },
     { name: "Services", path: "/services" },
     { name: "Projects", path: "/projects" },
+    { name: "Insights", path: "/insights" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -18,6 +27,10 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] bg-primary origin-left z-50"
+        style={{ scaleX }}
+      />
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/">
