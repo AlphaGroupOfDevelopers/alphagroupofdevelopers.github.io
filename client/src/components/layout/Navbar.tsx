@@ -112,7 +112,7 @@ export default function Navbar() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background px-6 pt-20"
             >
-              <div className="flex flex-col items-center space-y-8 w-full">
+              <div className="flex flex-col items-center space-y-6 w-full">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.path}
@@ -123,7 +123,7 @@ export default function Navbar() {
                     <Link 
                       href={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`text-4xl font-serif font-bold transition-all duration-300 hover:italic hover:tracking-wider ${
+                      className={`text-2xl font-serif font-bold transition-all duration-300 hover:italic hover:tracking-wider ${
                         isActive(link.path) ? "text-primary italic" : "text-muted-foreground/40 hover:text-primary"
                       }`}
                     >
