@@ -14,14 +14,15 @@ const team: { name: string; role: string; image?: string; background?: string; e
   {
     name: "Godfred Fokuo",
     role: "Co-Founder & User Experience Lead",
-    // image will be added when available
+    image: "/Godfred Fokuo.jpeg",
     background: "Full Stack Developer & Behavioral Economics Enthusiast.",
     expertise: "Making Software Easy to Use and Engaging.",
     bio: "Connects human psychology with computer logic, making sure people actually want to use the systems we build. Godfred bridges the gap between technical logic and human behavior."
   },
   {
-    name: "Livingstone Keli",
+    name: "Livingstone Awudzah",
     role: "Backend Engineer",
+    image: "/livingstone.jpeg",
     bio: "Directs how data flows through our systems. Livingstone builds the quiet, powerful engines that keep our applications running."
   },
   {
@@ -47,7 +48,7 @@ export default function Team() {
               The Team
             </h1>
             <p className="text-xl text-muted-foreground mr-20 mb-20 max-w-2xl font-sans leading-relaxed">
-              We are a close-knit group of engineers and designers. We don't just build code; 
+              We are a close-knit group of engineers and designers. We don't just build code;
               we solve problems for people.
             </p>
 
@@ -57,9 +58,9 @@ export default function Team() {
                   <div className="flex flex-col gap-6">
                     {member.image && (
                       <div className="w-full aspect-square bg-secondary overflow-hidden mb-4 shadow-sm border border-border">
-                        <img 
-                          src={member.image} 
-                          alt={member.name} 
+                        <img
+                          src={member.image}
+                          alt={member.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -69,14 +70,14 @@ export default function Team() {
                       <p className="text-xs uppercase tracking-[0.2em] text-primary font-bold mb-8">
                         {member.role}
                       </p>
-                      
+
                       {member.background && (
                         <div className="mb-6 space-y-4 text-sm font-sans text-muted-foreground">
                           <p><strong className="text-primary font-medium">Background:</strong> {member.background}</p>
                           <p><strong className="text-primary font-medium">Expertise:</strong> {member.expertise}</p>
                         </div>
                       )}
-                      
+
                       <p className="text-muted-foreground font-sans leading-relaxed text-lg">
                         {member.bio}
                       </p>

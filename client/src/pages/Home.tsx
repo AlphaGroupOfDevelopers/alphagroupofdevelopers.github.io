@@ -26,6 +26,11 @@ export default function Home() {
       image: "/alpha_banner.png"
     },
     {
+      title: "Collaborating for Excellence",
+      desc: "Our team works together to ensure every project meets the highest standards of quality and performance.",
+      image: "/team meeting.jpeg"
+    },
+    {
       title: "Engineering with Integrity and Precision",
       desc: "Our systems are built to last, combining stable architecture with intuitive human-centric design.",
       image: "/enhanced_team.png"
