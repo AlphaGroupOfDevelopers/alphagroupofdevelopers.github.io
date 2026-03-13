@@ -29,11 +29,11 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-xs uppercase tracking-widest text-primary-foreground/50 font-sans">Explore</h4>
             <div className="grid grid-cols-1 gap-2 text-sm font-sans text-primary-foreground/70">
-              <Link href="/"><a className="hover:text-white transition-colors">Overview</a></Link>
-              <Link href="/team"><a className="hover:text-white transition-colors">The Team</a></Link>
-              <Link href="/services"><a className="hover:text-white transition-colors">Our Services</a></Link>
-              <Link href="/projects"><a className="hover:text-white transition-colors">Recent Work</a></Link>
-              <Link href="/insights"><a className="hover:text-white transition-colors">Insights</a></Link>
+              <Link href="/" className="hover:text-white transition-colors">Overview</Link>
+              <Link href="/team" className="hover:text-white transition-colors">The Team</Link>
+              <Link href="/services" className="hover:text-white transition-colors">Our Services</Link>
+              <Link href="/projects" className="hover:text-white transition-colors">Recent Work</Link>
+              <Link href="/insights" className="hover:text-white transition-colors">Insights</Link>
             </div>
           </div>
 
@@ -41,9 +41,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-xs uppercase tracking-widest text-primary-foreground/50 font-sans">Governance</h4>
             <div className="grid grid-cols-1 gap-2 text-sm font-sans text-primary-foreground/70">
-              <Link href="/terms"><a className="hover:text-white transition-colors">Terms of Service</a></Link>
-              <Link href="/privacy"><a className="hover:text-white transition-colors">Privacy & Security</a></Link>
-              <Link href="/licensing"><a className="hover:text-white transition-colors">Agency Licensing</a></Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy & Security</Link>
+              <Link href="/licensing" className="hover:text-white transition-colors">Agency Licensing</Link>
             </div>
           </div>
 

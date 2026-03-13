@@ -116,19 +116,43 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Institutional Trust Section */}
-        <section className="py-12 border-b border-border bg-secondary/10">
-          <div className="container mx-auto px-6">
-            <p className="text-[10px] font-sans tracking-[0.3em] uppercase text-muted-foreground/50 mb-8 text-center">
-              Trusted by Leading Institutions
+        {/* Clientele Section (Infinite Scroll) */}
+        <section className="py-20 border-b border-border bg-secondary/10 overflow-hidden relative">
+          <div className="container mx-auto px-6 mb-12">
+            <p className="text-[10px] font-sans tracking-[0.4em] uppercase text-muted-foreground/50 text-center">
+              Our Clientele
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-              {["Ghana Revenue Authority", "Atsupi's Cosmetics", "Walmas Travel", "iPhone Global"].map((partner, i) => (
-                <span key={i} className="text-xl md:text-2xl font-serif text-primary font-bold tracking-tighter cursor-default">
+          </div>
+          
+          <div className="relative flex overflow-x-hidden">
+            {/* Gradient Masks */}
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background/80 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background/80 to-transparent z-10" />
+            
+            <motion.div 
+              className="flex whitespace-nowrap gap-24 py-4"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ 
+                duration: 20, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+            >
+              {[
+                "Ghana Revenue Authority", 
+                "Atsupi's Cosmetics", 
+                "Walmas Travel", 
+                "iPhone Global",
+                "Ghana Revenue Authority", 
+                "Atsupi's Cosmetics", 
+                "Walmas Travel", 
+                "iPhone Global"
+              ].map((partner, i) => (
+                <span key={i} className="text-2xl md:text-3xl font-serif text-primary/40 font-bold tracking-tighter cursor-default hover:text-primary transition-colors duration-500">
                   {partner}
                 </span>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -146,7 +170,7 @@ export default function Home() {
                   </p>
                   <p>
                     Our mission is to help businesses and organizations solve complex problems 
-                    through innovative software and applications. We partner with leading 
+                    through innovative software and applications. We partner with 
                     institutions and private ventures to build scalable, reliable solutions 
                     that create lasting impact.
                   </p>
@@ -159,7 +183,7 @@ export default function Home() {
                   </div>
                   <div className="border-l-2 border-primary pl-6 py-2">
                     <span className="block text-3xl font-serif text-primary font-bold">5+</span>
-                    <span className="text-sm uppercase tracking-widest text-muted-foreground">Strategic Partners</span>
+                    <span className="text-sm uppercase tracking-widest text-muted-foreground">Key Clients</span>
                   </div>
                 </div>
               </div>
@@ -217,16 +241,13 @@ export default function Home() {
               Our Engineering Stack
             </motion.p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-8">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-y-16 gap-x-8">
               {[
-                { name: "React", category: "Frontend" },
+                { name: "Next.js", category: "Framework" },
+                { name: "React", category: "Library" },
                 { name: "TypeScript", category: "Language" },
                 { name: "Node.js", category: "Backend" },
-                { name: "PostgreSQL", category: "Database" },
-                { name: "Framer Motion", category: "Animation" },
-                { name: "Tailwind CSS", category: "Styling" },
-                { name: "Vite", category: "Build Tool" },
-                { name: "Git", category: "Version Control" }
+                { name: "Tailwind CSS", category: "Styling" }
               ].map((tech, i) => (
                 <motion.div 
                   key={i} 
@@ -266,7 +287,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
               {[
                 { value: "2024", label: "Founded", detail: "Emerging as a leader in Ghana's tech sector." },
-                { value: "5+", label: "Strategic Partners", detail: "Partnering with government and private enterprise." },
+                { value: "5+", label: "Key Clients", detail: "Partnering with government and private enterprise." },
                 { value: "100%", label: "Stability Focused", detail: "Engineering legacy systems that survive and scale." }
               ].map((stat, i) => (
                 <motion.div 

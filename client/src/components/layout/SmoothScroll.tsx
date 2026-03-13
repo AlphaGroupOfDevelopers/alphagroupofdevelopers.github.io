@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
+import { useLocation } from "wouter";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const [location] = useLocation();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -14,6 +18,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       infinite: false,
     });
 
+    lenisRef.current = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -25,6 +31,13 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenis.destroy();
     };
   }, []);
+
+  // Handle route changes
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+  }, [location]);
 
   return <>{children}</>;
 }

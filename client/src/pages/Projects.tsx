@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const partnerships = [
+const clientWork = [
   {
     client: "Ghana Revenue Authority (GRA)",
     desc: "Engineering systems to support fiscal management, e-VAT platforms, and national economic infrastructure.",
@@ -16,7 +16,7 @@ const partnerships = [
   },
   {
     client: "Walmas Travel Consult & iPhone Global",
-    desc: "Partnering to build secure, scalable digital foundations and agentic workflows for enterprise operations.",
+    desc: "Building secure, scalable digital foundations and agentic workflows for enterprise operations.",
     tags: ["Enterprise", "AI Workflows", "Security"]
   }
 ];
@@ -48,7 +48,7 @@ export default function Projects() {
             </p>
 
             <div className="flex flex-col">
-              {partnerships.map((item, index) => (
+              {clientWork.map((item, index) => (
                 <div 
                   key={index} 
                   className="group border-b border-border py-12 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 cursor-default"
