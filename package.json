@@ -1,6 +1,7 @@
 {
   "name": "alpha_developers",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.4.1",
   "type": "module",
   "license": "MIT",
   "scripts": {
