@@ -102,72 +102,42 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Nav Overlay */}
+        {/* Mobile Nav Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[9999] bg-background flex flex-col w-full h-screen"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden overflow-hidden bg-background border-t border-border/10"
             >
-              {/* Header inside overlay */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-border/10 shrink-0">
-                <span className="text-xl font-serif font-bold tracking-tight text-primary italic">
-                  Alpha
-                </span>
-                <button
-                  className="w-10 h-10 flex items-center justify-center text-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <X size={28} />
-                </button>
-              </div>
-
-              {/* Scrollable Links Area */}
-              <div className="flex-1 overflow-y-auto px-8 py-10">
-                <div className="flex flex-col space-y-6">
-                  {navLinks.map((link, i) => (
-                    <motion.div
-                      key={link.path}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 * i }}
+              <div className="flex flex-col py-8 px-6 space-y-6">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * i }}
+                  >
+                    <Link 
+                      href={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`text-xl font-serif font-medium transition-all duration-300 ${
+                        isActive(link.path) ? "text-primary italic" : "text-muted-foreground hover:text-primary"
+                      }`}
                     >
-                      <Link 
-                        href={link.path}
-                        onClick={() => setIsOpen(false)}
-                        className="group flex flex-col"
-                      >
-                        <span className="text-[10px] font-mono text-primary/20 mb-1">
-                          0{i + 1}
-                        </span>
-                        <span className={`text-4xl font-serif font-bold transition-all duration-300 group-hover:italic ${
-                          isActive(link.path) ? "text-primary italic" : "text-primary/40 hover:text-primary"
-                        }`}>
-                          {link.name}
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Footer inside overlay */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="p-8 border-t border-border/10 shrink-0 flex flex-col space-y-4"
-              >
-                <div className="flex justify-between items-center w-full">
-                  <p className="text-[9px] uppercase tracking-[0.4em] text-muted-foreground/40 font-sans">
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+                
+                <div className="pt-6 border-t border-border/5">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/30 font-sans">
                     AlphaGroup &copy; {new Date().getFullYear()}
                   </p>
-                  <div className="w-8 h-[1px] bg-primary/20"></div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
