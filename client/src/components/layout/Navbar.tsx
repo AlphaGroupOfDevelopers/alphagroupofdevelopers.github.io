@@ -106,42 +106,61 @@ export default function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20, clipPath: 'circle(0% at 90% 5%)' }}
-              animate={{ opacity: 1, y: 0, clipPath: 'circle(150% at 90% 5%)' }}
-              exit={{ opacity: 0, y: -20, clipPath: 'circle(0% at 90% 5%)' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background px-6 pt-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[100] bg-background flex flex-col"
             >
-              <div className="flex flex-col items-center space-y-6 w-full">
+              {/* Header inside overlay to keep toggle button accessible */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
+                <span className="text-xl font-serif font-bold tracking-tight text-primary italic">
+                  Alpha
+                </span>
+                <button
+                  className="w-10 h-10 flex items-center justify-center text-primary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <X size={28} />
+                </button>
+              </div>
+
+              <div className="flex-1 flex flex-col justify-center px-8 space-y-10">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.path}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.1 }}
                   >
                     <Link 
                       href={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`text-2xl font-serif font-bold transition-all duration-300 hover:italic hover:tracking-wider ${
-                        isActive(link.path) ? "text-primary italic" : "text-muted-foreground/40 hover:text-primary"
-                      }`}
+                      className="group flex items-baseline gap-4"
                     >
-                      {link.name}
+                      <span className="text-xs font-mono text-primary/30 group-hover:text-primary transition-colors">
+                        0{i + 1}
+                      </span>
+                      <span className={`text-4xl md:text-5xl font-serif font-bold transition-all duration-500 group-hover:italic group-hover:pl-4 ${
+                        isActive(link.path) ? "text-primary italic" : "text-primary/40"
+                      }`}>
+                        {link.name}
+                      </span>
                     </Link>
                   </motion.div>
                 ))}
               </div>
               
               <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute bottom-12 flex flex-col items-center space-y-4"
+                className="p-8 border-t border-border/40 flex justify-between items-center"
               >
                 <p className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground/50 font-sans">
                   AlphaGroupOfDevelopers &copy; {new Date().getFullYear()}
                 </p>
+                <div className="w-12 h-[1px] bg-primary/20"></div>
               </motion.div>
             </motion.div>
           )}
