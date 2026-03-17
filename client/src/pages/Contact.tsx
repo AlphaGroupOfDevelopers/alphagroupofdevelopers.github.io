@@ -35,24 +35,53 @@ export default function Contact() {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Trigger Confetti
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#000000', '#333333', '#666666']
-    });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const subject = `Inquiry: ${formData.projectType || "General"} from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AProject Type: ${formData.projectType}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-    
-    // Small delay to let them see the confetti
-    setTimeout(() => {
-      window.location.href = `mailto:alphagroupofdevelopers@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    }, 1000);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      projectType: formData.projectType,
+      message: formData.message,
+    };
+
+    try {
+      const response = await fetch("ourmamagementsystemurl/api/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || `Request failed with status ${response.status}`);
+      }
+
+      // Trigger confetti on success
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#000000', '#333333', '#666666']
+      });
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", projectType: "", message: "" });
+    } catch (err: unknown) {
+      setSubmitStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -158,8 +187,22 @@ export default function Contact() {
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                   />
                 </div>
-                <Button type="submit" className="w-full bg-primary text-background py-6 text-lg hover:bg-primary/90 mt-8 rounded-none transition-all">
-                  Send Inquiry
+                {submitStatus === "success" && (
+                  <p className="text-center text-sm font-sans text-green-600 font-medium">
+                    ✓ Message sent successfully! We'll be in touch soon.
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="text-center text-sm font-sans text-red-600 font-medium">
+                    ✗ {errorMessage}
+                  </p>
+                )}
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full bg-primary text-background py-6 text-lg hover:bg-primary/90 mt-8 rounded-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {submitting ? "Sending…" : "Send Inquiry"}
                 </Button>
               </form>
             </div>
