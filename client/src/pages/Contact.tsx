@@ -53,7 +53,7 @@ export default function Contact() {
     };
 
     try {
-      const response = await fetch("ourmamagementsystemurl/api/v1/messages", {
+      const response = await fetch("https://team-management-system-zq6x.onrender.com/api/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,8 +114,8 @@ export default function Contact() {
 
                 <div>
                   <h4 className="text-xs uppercase tracking-widest text-primary font-bold mb-2">Email</h4>
-                  <a href="mailto:alphagroupofdevelopers@gmail.com" className="text-primary hover:italic transition-all">
-                    alphagroupofdevelopers@gmail.com
+                  <a href="mailto:developershub26@gmail.com" className="text-primary hover:italic transition-all">
+                    developershub26@gmail.com
                   </a>
                 </div>
                 <div>
