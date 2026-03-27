@@ -29,6 +29,7 @@ const team: { name: string; role: string; image?: string; background?: string; e
   {
     name: "George Essel",
     role: "Interface Designer",
+    image: "/george.jpeg",
     bio: "Specializes in accessible and readable interfaces. George believes that great software should feel natural to use."
   }
 ];
