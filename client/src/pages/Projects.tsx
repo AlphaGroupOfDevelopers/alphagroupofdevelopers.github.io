@@ -5,6 +5,24 @@ import Footer from "@/components/layout/Footer";
 
 const clientWork = [
   {
+    client: "Scanty's Closet",
+    desc: "A premium digital storefront featuring seamless cart experiences, real-time secure checkout, and polished dynamic animations.",
+    tags: ["E-commerce", "Full Stack", "UI/UX"],
+    link: "https://scantycloset.vercel.app"
+  },
+  {
+    client: "Team Management System",
+    desc: "A comprehensive dashboard for managing teams, tasks, and workflows. (Note: Optimized for Desktop).",
+    tags: ["SaaS", "Dashboard", "Desktop Only"],
+    link: "https://team-management-system-zq6x.onrender.com"
+  },
+  {
+    client: "IkeNation Clothing",
+    desc: "A modern, stylish e-commerce platform built for a clothing brand, featuring seamless browsing and purchasing flows.",
+    tags: ["E-commerce", "Fashion", "Frontend"],
+    link: "https://ikenation-clothing.vercel.app"
+  },
+  {
     client: "Ghana Revenue Authority (GRA)",
     desc: "Engineering systems to support fiscal management, e-VAT platforms, and national economic infrastructure.",
     tags: ["Infrastructure", "National Systems", "Scale"]
@@ -48,35 +66,52 @@ export default function Projects() {
             </p>
 
             <div className="flex flex-col">
-              {clientWork.map((item, index) => (
-                <div 
-                  key={index} 
-                  className="group border-b border-border py-12 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 cursor-default"
-                >
-                  <span className="text-xs font-sans text-muted-foreground w-12 shrink-0">
-                    0{index + 1}
-                  </span>
-                  <div className="flex-1">
-                    <h3 className="text-3xl md:text-4xl font-serif text-primary group-hover:italic transition-all mb-4">
-                      {item.client}
-                    </h3>
-                    <p className="text-lg font-sans text-muted-foreground max-w-xl leading-relaxed mb-6">
-                      {item.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      {item.tags.map((tag, ti) => (
-                        <span key={ti} className="text-[10px] uppercase tracking-wider px-3 py-1 bg-secondary text-primary border border-border">
-                          {tag}
-                        </span>
-                      ))}
+              {clientWork.map((item, index) => {
+                const ItemContent = (
+                  <>
+                    <span className="text-xs font-sans text-muted-foreground w-12 shrink-0">
+                      0{index + 1}
+                    </span>
+                    <div className="flex-1">
+                      <h3 className="text-3xl md:text-4xl font-serif text-primary group-hover:italic transition-all mb-4">
+                        {item.client}
+                      </h3>
+                      <p className="text-lg font-sans text-muted-foreground max-w-xl leading-relaxed mb-6">
+                        {item.desc}
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        {item.tags.map((tag, ti) => (
+                          <span key={ti} className="text-[10px] uppercase tracking-wider px-3 py-1 bg-secondary text-primary border border-border">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                    <ArrowRight 
+                      size={24} 
+                      className="text-border group-hover:text-primary group-hover:translate-x-2 transition-all self-end md:self-center" 
+                    />
+                  </>
+                );
+
+                const itemClasses = `group border-b border-border py-12 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 transition-colors ${item.link ? 'cursor-pointer hover:bg-muted/30' : 'cursor-default'}`;
+
+                return item.link ? (
+                  <a 
+                    key={index} 
+                    href={item.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={itemClasses}
+                  >
+                    {ItemContent}
+                  </a>
+                ) : (
+                  <div key={index} className={itemClasses}>
+                    {ItemContent}
                   </div>
-                  <ArrowRight 
-                    size={24} 
-                    className="text-border group-hover:text-primary group-hover:translate-x-2 transition-all self-end md:self-center" 
-                  />
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-20">
