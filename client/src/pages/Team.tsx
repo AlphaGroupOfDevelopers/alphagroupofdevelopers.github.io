@@ -21,12 +21,6 @@ const team: { name: string; role: string; image?: string; background?: string; e
     bio: "Connects human psychology with computer logic, making sure people actually want to use the systems we build. Godfred bridges the gap between technical logic and human behavior."
   },
   {
-    name: "Livingstone Awudzah",
-    role: "Backend Engineer",
-    image: "/livingstone.jpeg",
-    bio: "Directs how data flows through our systems. Livingstone builds the quiet, powerful engines that keep our applications running."
-  },
-  {
     name: "George Essel",
     role: "Interface Designer",
     image: "/george.jpeg",
