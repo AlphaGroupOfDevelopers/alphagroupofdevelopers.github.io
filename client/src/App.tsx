@@ -4,6 +4,8 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { SiteDataProvider } from "./contexts/SiteDataContext";
+import { AdminAuthProvider } from "./contexts/AdminAuthContext";
 import SmoothScroll from "./components/layout/SmoothScroll";
 import CustomCursor from "./components/ui/CustomCursor";
 import Home from "./pages/Home";
@@ -15,6 +17,7 @@ import Insights from "./pages/Insights";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Licensing from "./pages/Licensing";
+import Admin from "./pages/Admin";
 
 function Router() {
   return (
@@ -28,6 +31,7 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/licensing" component={Licensing} />
+      <Route path="/admin" component={Admin} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
@@ -37,14 +41,18 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
-        <SmoothScroll>
-          <TooltipProvider>
-            <CustomCursor />
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </SmoothScroll>
+      <ThemeProvider defaultTheme="light" switchable={true}>
+        <SiteDataProvider>
+          <AdminAuthProvider>
+            <SmoothScroll>
+              <TooltipProvider>
+                <CustomCursor />
+                <Toaster richColors position="top-right" />
+                <Router />
+              </TooltipProvider>
+            </SmoothScroll>
+          </AdminAuthProvider>
+        </SiteDataProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

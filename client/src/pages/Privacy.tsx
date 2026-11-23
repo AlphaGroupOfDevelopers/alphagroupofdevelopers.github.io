@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { useSiteData } from "@/contexts/SiteDataContext";
 
 export default function Privacy() {
+  const { siteData } = useSiteData();
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 py-24">
+      <main className="flex-1 py-20 md:py-28">
         <div className="container mx-auto px-6 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -14,11 +17,11 @@ export default function Privacy() {
             className="prose prose-slate max-w-none"
           >
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-primary mb-12">Privacy & Data Security</h1>
-            
+
             <section className="mb-12 border-l-2 border-primary pl-8">
               <h2 className="text-2xl font-serif text-primary mb-4 italic">The Alpha Security Mandate</h2>
               <p className="text-muted-foreground leading-relaxed font-sans mb-4">
-                At AlphaGroupOfDevelopers, client privacy is not just a policy—it is a core engineering requirement. We handle sensitive data for national institutions and private enterprises with a zero-vulnerability mindset.
+                At {siteData.general.companyName}, client privacy is not just a policy—it is a core engineering requirement. We handle sensitive data for national institutions and private enterprises with a zero-vulnerability mindset.
               </p>
             </section>
 
