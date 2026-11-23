@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /404
 
-Sitemap: https://alphagroupofdevelopers.github.io/sitemap.xml
+Sitemap: https://alphagroupofdevelopers.com/sitemap.xml
