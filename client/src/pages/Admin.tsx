@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { useSiteData } from "@/contexts/SiteDataContext";
+import {
+  commitSiteDataToGitHub,
+  validateGitHubPAT,
+  saveGitHubPAT,
+  getGitHubPAT,
+  clearGitHubPAT,
+  hasGitHubPAT,
+} from "@/lib/githubSync";
 import { Link } from "wouter";
 import {
   Shield,
@@ -29,7 +37,13 @@ import {
   MessageSquare,
   AlertCircle,
   Copy,
-  ChevronRight
+  ChevronRight,
+  Github,
+  Rocket,
+  Loader2,
+  CheckCheck,
+  XCircle,
+  Wifi
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -129,10 +143,73 @@ export default function Admin() {
   // Import JSON state
   const [importText, setImportText] = useState("");
 
+  // GitHub Sync State
+  const [githubPatInput, setGithubPatInput] = useState(getGitHubPAT());
+  const [isPatSaved, setIsPatSaved] = useState(hasGitHubPAT());
+  const [isValidatingPat, setIsValidatingPat] = useState(false);
+  const [isDeploying, setIsDeploying] = useState(false);
+  const [lastDeployUrl, setLastDeployUrl] = useState<string | null>(null);
+
   // Handle Login
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     login(passcode);
+  };
+
+  const handleSavePat = async () => {
+    if (!githubPatInput.trim()) {
+      toast.error("Please enter a GitHub Personal Access Token");
+      return;
+    }
+    setIsValidatingPat(true);
+    const valid = await validateGitHubPAT(githubPatInput.trim());
+    setIsValidatingPat(false);
+    if (valid) {
+      saveGitHubPAT(githubPatInput.trim());
+      setIsPatSaved(true);
+      toast.success("GitHub Token Connected!", {
+        description: "You can now publish edits globally to all visitors worldwide.",
+      });
+    } else {
+      toast.error("Invalid GitHub Token or Repository Access Denied", {
+        description: "Ensure the token has repo contents write permissions for AlphaGroupOfDevelopers/alphagroupofdevelopers.github.io",
+      });
+    }
+  };
+
+  const handleClearPat = () => {
+    clearGitHubPAT();
+    setGithubPatInput("");
+    setIsPatSaved(false);
+    toast.info("GitHub Token removed");
+  };
+
+  const handlePublishToGitHub = async (customMessage?: string) => {
+    if (!hasGitHubPAT()) {
+      toast.error("GitHub Token Required", {
+        description: "Please configure your GitHub Personal Access Token in Settings & Sync to publish changes globally.",
+      });
+      setActiveTab("settings");
+      return;
+    }
+    setIsDeploying(true);
+    try {
+      const result = await commitSiteDataToGitHub(
+        siteData,
+        customMessage || `chore(cms): update website content [${new Date().toISOString().slice(0, 16)}]`
+      );
+      setLastDeployUrl(result.commitUrl);
+      toast.success("Changes Pushed to GitHub Successfully!", {
+        description: "GitHub Actions has automatically triggered a build. Your changes will be live globally in ~2 minutes.",
+      });
+    } catch (err: any) {
+      console.error(err);
+      toast.error("GitHub Sync Failed", {
+        description: err?.message || "Failed to commit changes to GitHub.",
+      });
+    } finally {
+      setIsDeploying(false);
+    }
   };
 
   // --------------------------------------------------------------------------
@@ -441,6 +518,29 @@ export default function Admin() {
           </div>
 
           <div className="flex items-center space-x-2 md:space-x-3">
+            <Button
+              size="sm"
+              onClick={() => handlePublishToGitHub()}
+              disabled={isDeploying}
+              className="gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-sm transition-all"
+              title={
+                isPatSaved
+                  ? "Publish all current edits to GitHub so every visitor worldwide sees them"
+                  : "Connect GitHub token to publish changes globally"
+              }
+            >
+              {isDeploying ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Publishing...</span>
+                </>
+              ) : (
+                <>
+                  <Rocket className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Publish to Live Site</span>
+                </>
+              )}
+            </Button>
             <Link href="/">
               <Button variant="outline" size="sm" className="gap-1.5 text-xs">
                 <Eye className="w-3.5 h-3.5" />
@@ -1511,6 +1611,141 @@ export default function Admin() {
           {/* TAB 8: SETTINGS & BACKUPS */}
           {/* ================================================================ */}
           <TabsContent value="settings" className="space-y-6">
+            {/* GitHub Live Deployment Card */}
+            <Card className="border border-primary/30 shadow-md bg-gradient-to-br from-card via-card to-primary/5">
+              <CardHeader>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="space-y-1">
+                    <CardTitle className="text-xl font-serif text-primary flex items-center gap-2">
+                      <Github className="w-5 h-5 text-primary" /> GitHub Live Deployment (Global Sync)
+                    </CardTitle>
+                    <CardDescription>
+                      Publish edits to all visitors worldwide by committing directly to the GitHub repository.
+                    </CardDescription>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {isPatSaved ? (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        <CheckCheck className="w-3.5 h-3.5" /> Token Connected
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                        <AlertCircle className="w-3.5 h-3.5" /> Token Not Set
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  AlphaGroupOfDevelopers is deployed via <strong>GitHub Pages</strong>. When you connect a GitHub Personal Access Token (PAT),
+                  clicking <strong>"Publish to Live Site"</strong> automatically updates <code className="bg-muted px-1.5 py-0.5 rounded text-primary font-mono text-[11px]">initialSiteData.ts</code> in your repository.
+                  GitHub Actions then builds and serves the new content to all visitors worldwide in ~2 minutes.
+                </p>
+
+                <div className="space-y-3 p-4 rounded-lg bg-secondary/40 border border-border">
+                  <Label htmlFor="githubPat" className="text-xs font-semibold flex items-center justify-between">
+                    <span>GitHub Personal Access Token (PAT)</span>
+                    <a
+                      href="https://github.com/settings/tokens/new?scopes=repo&description=AlphaGroup+Admin+CMS"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-primary hover:underline font-normal inline-flex items-center gap-1"
+                    >
+                      Generate token on GitHub <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </Label>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Input
+                      id="githubPat"
+                      type="password"
+                      placeholder="ghp_xxxxxxxxxxxxxxxxxxxx or github_pat_xxxx"
+                      value={githubPatInput}
+                      onChange={e => setGithubPatInput(e.target.value)}
+                      className="font-mono text-xs flex-1"
+                    />
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        onClick={handleSavePat}
+                        disabled={isValidatingPat}
+                        className="bg-primary text-background text-xs gap-1.5"
+                      >
+                        {isValidatingPat ? (
+                          <>
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Verifying...</span>
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <span>{isPatSaved ? "Update Token" : "Connect Token"}</span>
+                          </>
+                        )}
+                      </Button>
+                      {isPatSaved && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={handleClearPat}
+                          className="text-destructive hover:bg-destructive/10 text-xs gap-1"
+                        >
+                          <XCircle className="w-3.5 h-3.5" />
+                          <span>Disconnect</span>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">
+                    Required permission: <strong>repo</strong> (Full control of private repositories) or fine-grained token with <strong>Contents: Read & Write</strong> on <code className="font-mono text-primary">alphagroupofdevelopers.github.io</code>. Your token is stored securely in your browser's local storage and is never exposed to visitors.
+                  </p>
+                </div>
+
+                {/* Publish Action Box */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold text-primary flex items-center gap-2">
+                      <Rocket className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      Publish All Active Changes Now
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      Commits all current projects, team members, services, brand info, and insights to your GitHub repo.
+                    </p>
+                    {lastDeployUrl && (
+                      <p className="text-xs text-emerald-600 dark:text-emerald-400 pt-1">
+                        ✓ Last commit created:{" "}
+                        <a
+                          href={lastDeployUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline font-mono"
+                        >
+                          View commit on GitHub →
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                  <Button
+                    onClick={() => handlePublishToGitHub()}
+                    disabled={isDeploying || !isPatSaved}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs gap-2 shrink-0"
+                  >
+                    {isDeploying ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Deploying...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Rocket className="w-4 h-4" />
+                        <span>Deploy to Production</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Backup & Code Sync */}
             <Card className="border border-border">
               <CardHeader>
